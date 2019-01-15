@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gunner : MonoBehaviour
+public class Gunner : Player
 {
+    [SerializeField]Cannon cannon;
+    float fire = 0f, prevFire = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -11,8 +14,13 @@ public class Gunner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        fire = Input.GetAxis("Fire");
+        if(fire > 0f && prevFire == 0f)
+        {
+            cannon.Fire();
+        }
+        prevFire = fire;
     }
 }

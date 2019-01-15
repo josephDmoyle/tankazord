@@ -6,13 +6,16 @@ public class Pilot : Player
 {
     [SerializeField] Transform hull, footL, footR;
     [SerializeField] float turnSensitivity, footSensitivity;
-    float turn = 0f, rx = 0f, ry = 0f, lx = 0f, ly = 0f, ryGoal = 1f;
-    float timeStep = 1f, timerStep = 0f;
+    float turn = 0f, rx = 0f, ry = 0f, lx = 0f, ly = 0f, go = 0f;
+
     Rigidbody body;
+    Animator anim;
+
     [SerializeField]Vector3 vel;
     private void Awake()
     {
         body = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
 
     void Start()
@@ -28,28 +31,20 @@ public class Pilot : Player
         lx = Input.GetAxis("LX");
         ly = Input.GetAxis("LY");
 
-
         turn *= Time.fixedDeltaTime;
 
         transform.Rotate(0, turn, 0);
 
-        if(vel == Vector3.zero)
-        {
-            if (ry == 1f && ly == -1f && ry == ryGoal)
-            {
-                timerStep = 0f;
-                ryGoal = -1f;
-                vel = transform.forward * footSensitivity;
-            }
-            else if (ly == 1f && ry == -1f && ry == ryGoal)
-            {
-                timerStep = 0f;
-                ryGoal = 1f;
-                vel = transform.forward * footSensitivity;
-            }
-        }
-        body.velocity = vel;
+        anim.SetFloat("RLeg", ry);
+        anim.SetFloat("LLeg", ly);
 
-        vel = Vector3.Lerp(vel, Vector3.zero, timerStep += Time.fixedDeltaTime);
+        body.velocity = transform.forward * go * footSensitivity;
+
+        //vel = Vector3.Lerp(vel, Vector3.zero, timerStep += Time.fixedDeltaTime);
+    }
+
+    public void Walk(float speed)
+    {
+        go = speed;
     }
 }

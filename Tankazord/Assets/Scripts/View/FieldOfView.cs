@@ -42,6 +42,7 @@ namespace Princeps.Player
                     target.inSight = true;
                 }
             }
+            // Use the an array pointer to record the colliders which can be viewed last frame.
             if ( _cachedViewColliders != null )
             {
                 for ( int i = 0; i < _cachedViewColliders.Length; i++ )

@@ -1,6 +1,5 @@
 ﻿using Princeps.Enemy;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Princeps.Player
@@ -10,6 +9,12 @@ namespace Princeps.Player
         public float viewUpdateCoolDownTime = 0.2f;
 
         public float viewRadius;
+
+        public CircleViewDrawer circleDrawer;
+
+        public ViewBoundaryDrawer boundaryDrawer_1;
+
+        public ViewBoundaryDrawer boundaryDrawer_2;
 
         [Range( 0, 180 )]
         public float viewAngle;
@@ -21,6 +26,8 @@ namespace Princeps.Player
         private List<Collider> _cachedCollidersInView;
 
         private List<Collider> _collidersInView;
+
+        private LineRenderer _lineRenderer;
 
         public Vector3 DirectionFromAngle( float angle, bool isGlobalAngle = true )
         {
@@ -66,12 +73,16 @@ namespace Princeps.Player
         private void Awake()
         {
             _timer = 0.0f;
+            _lineRenderer = this.GetComponent<LineRenderer>( );
         }
 
         private void Start()
         {
             _collidersInView = new List<Collider>( );
             _cachedCollidersInView = new List<Collider>( );
+            // Draw the view field
+            this.circleDrawer.DrawCircle( this.viewRadius );
+
         }
 
         private void Update()
@@ -84,6 +95,11 @@ namespace Princeps.Player
                 //Update view now
                 this.FindVisableTargets( );
             }
+            // Draw the actual view boundary
+            var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2, false );
+            var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2, false );
+            this.boundaryDrawer_1.DrawBoundary( this.transform.position, this.transform.position + viewDir_1 * this.viewRadius );
+            this.boundaryDrawer_2.DrawBoundary( this.transform.position, this.transform.position + viewDir_2 * this.viewRadius );
         }
     }
 }

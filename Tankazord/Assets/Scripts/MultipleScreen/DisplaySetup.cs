@@ -15,10 +15,4 @@ public class DisplaySetup : MonoBehaviour
             Display.displays[2].Activate();
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

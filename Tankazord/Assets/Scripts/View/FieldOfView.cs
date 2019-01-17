@@ -84,8 +84,9 @@ namespace Princeps.Player
             _cachedCollidersInView = new List<Collider>( );
             // Draw the view field
             this.circleDrawer.DrawCircle( this.viewRadius );
-            this.uiController.Setup( this.DirectionFromAngle( -this.viewAngle / 2, false ), this.DirectionFromAngle( this.viewAngle / 2, false ) );
-
+            var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2, false );
+            var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2, false );
+            this.uiController.Setup( new Vector2( viewDir_1.x, viewDir_1.z ), new Vector2( viewDir_2.x, viewDir_2.z ) );
         }
 
         private void Update()
@@ -106,10 +107,7 @@ namespace Princeps.Player
             this.boundaryDrawer_2.DrawBoundary( this.transform.position, this.transform.position + viewDir_2 * this.viewRadius );
 
             // Update the view in UI 
-            this.uiController.UpdateViewUI( viewDir_1, viewDir_2 );
-
-
-
+            this.uiController.UpdateViewUI( );
         }
     }
 }

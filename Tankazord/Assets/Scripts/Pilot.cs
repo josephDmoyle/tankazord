@@ -5,32 +5,46 @@ using UnityEngine;
 public class Pilot : Player
 {
     [SerializeField] Transform hull, footL, footR;
-    [SerializeField] float sensitivity;
-    float turn = 0f, rx = 0f, ry = 0f, lx = 0f, ly = 0f;
-    Vector3 L, R;
-    // Start is called before the first frame update
+    [SerializeField] float turnSensitivity, footSensitivity;
+    float turn = 0f, rx = 0f, ry = 0f, lx = 0f, ly = 0f, go = 0f;
+
+    Rigidbody body;
+    Animator anim;
+
+    [SerializeField]Vector3 vel;
+    private void Awake()
+    {
+        body = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+    }
+
     void Start()
     {
-        L = footL.transform.localPosition;
-        R = footR.transform.localPosition;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        turn = Input.GetAxis("Turn") * sensitivity;
+        turn = Input.GetAxis("Turn") * turnSensitivity;
         rx = Input.GetAxis("RX");
         ry = Input.GetAxis("RY");
         lx = Input.GetAxis("LX");
         ly = Input.GetAxis("LY");
 
-
         turn *= Time.fixedDeltaTime;
 
-        hull.Rotate(0, turn, 0);
+        transform.Rotate(0, turn, 0);
 
-        footL.localPosition = L + new Vector3(lx, 0f, ly);
+        anim.SetFloat("RLeg", ry);
+        anim.SetFloat("LLeg", ly);
 
-        footR.localPosition = R + new Vector3(rx, 0f, ry);
+        body.velocity = transform.forward * go * footSensitivity;
+
+        //vel = Vector3.Lerp(vel, Vector3.zero, timerStep += Time.fixedDeltaTime);
+    }
+
+    public void Walk(float speed)
+    {
+        go = speed;
     }
 }

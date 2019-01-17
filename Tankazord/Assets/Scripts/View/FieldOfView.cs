@@ -1,4 +1,5 @@
 ﻿using Princeps.Enemy;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -17,7 +18,9 @@ namespace Princeps.Player
 
         private float _timer;
 
-        private Collider[] _cachedViewColliders;
+        private List<Collider> _cachedCollidersInView;
+
+        private List<Collider> _collidersInView;
 
         public Vector3 DirectionFromAngle( float angle, bool isGlobalAngle = true )
         {
@@ -30,6 +33,7 @@ namespace Princeps.Player
 
         private void FindVisableTargets()
         {
+            _collidersInView.Clear( );
             var collidersInSphere = Physics.OverlapSphere( this.transform.position, this.viewRadius, this.targetMask );
             for ( int i = 0; i < collidersInSphere.Length; i++ )
             {
@@ -40,26 +44,34 @@ namespace Princeps.Player
                     // Assuming there are no obstacles
                     var target = targetTransform.GetComponent<Target>( );
                     target.inSight = true;
+                    _collidersInView.Add( collidersInSphere[i] );
                 }
             }
             // Use the an array pointer to record the colliders which can be viewed last frame.
-            if ( _cachedViewColliders != null )
+            if ( _cachedCollidersInView != null )
             {
-                for ( int i = 0; i < _cachedViewColliders.Length; i++ )
+                for ( int i = 0; i < _cachedCollidersInView.Count; i++ )
                 {
-                    var previousCollider = _cachedViewColliders[i];
-                    if ( !collidersInSphere.Contains( previousCollider ) )
+                    var previousCollider = _cachedCollidersInView[i];
+                    if ( !_collidersInView.Contains( previousCollider ) )
                     {
                         previousCollider.GetComponent<Target>( ).inSight = false;
                     }
                 }
             }
-            _cachedViewColliders = collidersInSphere;
+            _cachedCollidersInView.Clear( );
+            _cachedCollidersInView.AddRange( _collidersInView );
         }
 
         private void Awake()
         {
             _timer = 0.0f;
+        }
+
+        private void Start()
+        {
+            _collidersInView = new List<Collider>( );
+            _cachedCollidersInView = new List<Collider>( );
         }
 
         private void Update()

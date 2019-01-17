@@ -95,7 +95,8 @@ namespace Princeps.Player
                 //Update view now
                 this.FindVisableTargets( );
             }
-            // Draw the actual view boundary
+
+            // Update the actual view boundary
             var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2, false );
             var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2, false );
             this.boundaryDrawer_1.DrawBoundary( this.transform.position, this.transform.position + viewDir_1 * this.viewRadius );

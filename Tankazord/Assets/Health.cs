@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     {
         if(HitPoints <= 0f)
         {
+            GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Discrete;
             anim.SetTrigger("Die");
         }
     }

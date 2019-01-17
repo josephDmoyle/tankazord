@@ -2,25 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pilot : Player
+public class Controller : Player
 {
     [SerializeField] Transform hull, footL, footR;
     [SerializeField] float turnSensitivity, footSensitivity;
-    [SerializeField] Collider foot;
-    float turn = 0f, rx = 0f, ry = 0f, lx = 0f, ly = 0f, go = 0f;
+    [SerializeField] Cannon cannon;
+
+    float turn = 0f, rx = 0f, ry = 0f, lx = 0f, ly = 0f, go = 0f, fire = 0f, prevFire = 0f;
 
     Rigidbody body;
     Animator anim;
 
-    [SerializeField]Vector3 vel;
     private void Awake()
     {
         body = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-    }
-
-    void Start()
-    {
     }
 
     // Update is called once per frame
@@ -31,6 +27,7 @@ public class Pilot : Player
         ry = Input.GetAxis("RY");
         lx = Input.GetAxis("LX");
         ly = Input.GetAxis("LY");
+        fire = Input.GetAxis("Fire");
 
         turn *= Time.fixedDeltaTime;
 
@@ -43,10 +40,21 @@ public class Pilot : Player
 
         body.velocity = new Vector3(mov.x, body.velocity.y, mov.z);
 
+        if (fire > 0f && prevFire == 0f && go == 0f && turn == 0f)
+        {
+            anim.SetTrigger("Fire");
+        }
+        prevFire = fire;
+
     }
 
     public void Walk(float speed)
     {
         go = speed;
+    }
+
+    public void Fire()
+    {
+        cannon.Fire();
     }
 }

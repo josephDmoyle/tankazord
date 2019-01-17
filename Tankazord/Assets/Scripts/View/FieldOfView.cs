@@ -1,18 +1,60 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Princeps.Enemy;
 using UnityEngine;
 
-public class FieldOfVIew : MonoBehaviour
+namespace Princeps.Player
 {
-    // Start is called before the first frame update
-    void Start()
+    public class FieldOfView : MonoBehaviour
     {
-        
-    }
+        public float viewUpdateCoolDownTime = 0.2f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public float viewRadius;
+
+        [Range( 0, 180 )]
+        public float viewAngle;
+
+        public LayerMask targetMask;
+
+        private float _timer;
+
+        public Vector3 DirectionFromAngle( float angle, bool isGlobalAngle = true )
+        {
+            if ( !isGlobalAngle )
+            {
+                angle += this.transform.eulerAngles.y;
+            }
+            return new Vector3( Mathf.Sin( angle * Mathf.Deg2Rad ), 0, Mathf.Cos( angle * Mathf.Deg2Rad ) );
+        }
+
+        private void FindVisableTargets()
+        {
+            var collidersInSphere = Physics.OverlapSphere( this.transform.position, this.viewRadius, this.targetMask );
+            for ( int i = 0; i < collidersInSphere.Length; i++ )
+            {
+                var targetTransform = collidersInSphere[i].transform;
+                var direction = ( targetTransform.transform.position - this.transform.position ).normalized;
+                if ( Vector3.Angle( this.transform.forward, direction ) < viewAngle / 2 )
+                {
+                    // Assuming there are no obstacles
+                    var target = targetTransform.GetComponent<Target>( );
+                    target.inSight = true;
+                }
+            }
+        }
+
+        private void Awake()
+        {
+            _timer = 0.0f;
+        }
+
+        private void Update()
+        {
+            _timer += Time.deltaTime;
+            if ( _timer > this.viewUpdateCoolDownTime )
+            {
+                _timer = 0.0f;
+                //Update view now
+                this.FindVisableTargets( );
+            }
+        }
     }
 }

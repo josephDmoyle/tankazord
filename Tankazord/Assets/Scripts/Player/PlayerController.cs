@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Princeps
+namespace Princeps.Player
 {
     public class PlayerController : MonoBehaviour
     {

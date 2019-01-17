@@ -1,4 +1,5 @@
 ﻿using Princeps.Enemy;
+using System.Linq;
 using UnityEngine;
 
 namespace Princeps.Player
@@ -15,6 +16,8 @@ namespace Princeps.Player
         public LayerMask targetMask;
 
         private float _timer;
+
+        private Collider[] _cachedViewColliders;
 
         public Vector3 DirectionFromAngle( float angle, bool isGlobalAngle = true )
         {
@@ -39,6 +42,18 @@ namespace Princeps.Player
                     target.inSight = true;
                 }
             }
+            if ( _cachedViewColliders != null )
+            {
+                for ( int i = 0; i < _cachedViewColliders.Length; i++ )
+                {
+                    var previousCollider = _cachedViewColliders[i];
+                    if ( !collidersInSphere.Contains( previousCollider ) )
+                    {
+                        previousCollider.GetComponent<Target>( ).inSight = false;
+                    }
+                }
+            }
+            _cachedViewColliders = collidersInSphere;
         }
 
         private void Awake()
@@ -48,6 +63,7 @@ namespace Princeps.Player
 
         private void Update()
         {
+            // Use the timer to update the view based on a constant time.
             _timer += Time.deltaTime;
             if ( _timer > this.viewUpdateCoolDownTime )
             {

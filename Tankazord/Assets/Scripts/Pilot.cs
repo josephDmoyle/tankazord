@@ -6,6 +6,7 @@ public class Pilot : Player
 {
     [SerializeField] Transform hull, footL, footR;
     [SerializeField] float turnSensitivity, footSensitivity;
+    [SerializeField] Collider foot;
     float turn = 0f, rx = 0f, ry = 0f, lx = 0f, ly = 0f, go = 0f;
 
     Rigidbody body;
@@ -38,9 +39,10 @@ public class Pilot : Player
         anim.SetFloat("RLeg", ry);
         anim.SetFloat("LLeg", ly);
 
-        body.velocity = transform.forward * go * footSensitivity;
+        Vector3 mov = transform.forward * go * footSensitivity;
 
-        //vel = Vector3.Lerp(vel, Vector3.zero, timerStep += Time.fixedDeltaTime);
+        body.velocity = new Vector3(mov.x, body.velocity.y, mov.z);
+
     }
 
     public void Walk(float speed)

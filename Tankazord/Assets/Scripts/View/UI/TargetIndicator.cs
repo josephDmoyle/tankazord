@@ -1,18 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI.Extensions;
 
-public class TargetIndicator : MonoBehaviour
+namespace Princeps.Targets
 {
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent( typeof( UICircle ) )]
+    public class TargetIndicator : MonoBehaviour
     {
-        
-    }
+        public float lineThickness = 5.0f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private UICircle _uicr;
+
+        private void Awake()
+        {
+            _uicr = this.GetComponent<UICircle>( );
+        }
+
+        private void Start()
+        {
+
+        }
     }
 }

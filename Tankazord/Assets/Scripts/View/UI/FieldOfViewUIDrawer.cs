@@ -17,16 +17,19 @@ namespace Princeps.Player
         private void Awake()
         {
             _uilr = this.GetComponent<UILineRenderer>( );
+            _uilr.Points = new Vector2[this.segments + 1];
+        }
+
+        private void Start()
+        {
+            
         }
 
         public void DrawField()
         {
             float x;
-            float y;
-
+            float y;  
             float angle = 20f;
-
-            _uilr.Points = new Vector2[this.segments + 1];
 
             for ( int i = 0; i < ( this.segments + 1 ); i++ )
             {

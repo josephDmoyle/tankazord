@@ -43,6 +43,7 @@ namespace Princeps.Player
         private void FindVisableTargets()
         {
             _collidersInView.Clear( );
+            this.uiController.CleanTargets( );
             var collidersInSphere = Physics.OverlapSphere( this.transform.position, this.viewRadius, this.targetMask );
             for ( int i = 0; i < collidersInSphere.Length; i++ )
             {
@@ -54,6 +55,15 @@ namespace Princeps.Player
                     var target = targetTransform.GetComponent<Target>( );
                     target.inSight = true;
                     _collidersInView.Add( collidersInSphere[i] );
+
+                    // Draw the target on the view ui
+                    // The percentage for radius
+                    float radiusPercentage = Vector3.Magnitude( target.transform.position - this.transform.position ) / this.viewRadius;
+                    // Rotate the dircetion vector transform.eulerAngles.y counterclockwise
+                    float sin = Mathf.Sin( this.transform.eulerAngles.y * Mathf.Deg2Rad );
+                    float cos = Mathf.Cos( this.transform.eulerAngles.y * Mathf.Deg2Rad );
+                    Vector2 normalizeDir = new Vector2( direction.x * cos - direction.y * sin, direction.x * sin + direction.y * cos );
+                    this.uiController.DrawTarget( normalizeDir, radiusPercentage );
                 }
             }
             // Use the an array pointer to record the colliders which can be viewed last frame.
@@ -105,9 +115,6 @@ namespace Princeps.Player
             var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2, false );
             this.boundaryDrawer_1.DrawBoundary( this.transform.position, this.transform.position + viewDir_1 * this.viewRadius );
             this.boundaryDrawer_2.DrawBoundary( this.transform.position, this.transform.position + viewDir_2 * this.viewRadius );
-
-            // Update the view in UI 
-            this.uiController.UpdateViewUI( );
         }
     }
 }

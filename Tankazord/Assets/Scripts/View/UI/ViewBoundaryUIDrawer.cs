@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI.Extensions;
-using UnityEngine.UI;
 
 namespace Princeps.Player
 {
@@ -15,16 +14,20 @@ namespace Princeps.Player
         private void Awake()
         {
             _uilr = this.GetComponent<UILineRenderer>( );
+            _uilr.Points = new Vector2[2];
+        }
+
+        private void Start()
+        {
+
         }
 
         public void DrawBoundary( float radius, Vector2 direction )
         {
-            _uilr.Points = new Vector2[2];
             var startPosition = Vector2.zero;
             _uilr.Points[0] = startPosition;
             _uilr.Points[1] = startPosition + radius * direction;
         }
-
     }
 }
 

@@ -60,10 +60,10 @@ namespace Princeps.Player
                     var rawDirection = targetTransform.transform.position - this.transform.position;
                     // The percentage for radius
                     float radiusPercentage = rawDirection.magnitude / this.viewRadius;
-                    Debug.Log( "The player rotate eulerAngles is " + this.transform.eulerAngles.y );
-                    float angle = Vector3.SignedAngle( this.transform.forward, rawDirection, Vector3.up );
-                    var normalDir = new Vector2( Mathf.Sin( angle * Mathf.Deg2Rad ), Mathf.Cos( angle * Mathf.Deg2Rad ) );
-                    this.uiController.DrawTarget( normalDir, radiusPercentage );
+                    float angle = Vector3.SignedAngle( this.transform.forward, rawDirection.normalized, Vector3.up );
+                    // Map out the positions of target into the view ui.
+                    var dirInView = new Vector2( Mathf.Sin( angle * Mathf.Deg2Rad ), Mathf.Cos( angle * Mathf.Deg2Rad ) );
+                    this.uiController.DrawTarget( dirInView, radiusPercentage );
                 }
             }
             // Use the an array pointer to record the colliders which can be viewed last frame.
@@ -96,7 +96,7 @@ namespace Princeps.Player
             this.circleDrawer.DrawCircle( this.viewRadius );
             var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2, false );
             var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2, false );
-            this.uiController.Setup( new Vector2( viewDir_1.x, viewDir_1.z ), new Vector2( viewDir_2.x, viewDir_2.z ) );
+            this.uiController.Setup( this.viewAngle, new Vector2( viewDir_1.x, viewDir_1.z ), new Vector2( viewDir_2.x, viewDir_2.z ) );
         }
 
         private void Update()

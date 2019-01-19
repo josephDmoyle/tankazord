@@ -19,9 +19,9 @@ namespace Princeps.Player
 
         private int _curIndicatorIdx;
 
-        public void Setup( Vector2 boundaryDir_1, Vector2 boundaryDir_2 )
+        public void Setup( float viewAngle, Vector2 boundaryDir_1, Vector2 boundaryDir_2 )
         {
-            this.fieldDrawer.DrawField( );
+            this.fieldDrawer.DrawField( viewAngle );
             this.boundaryDrawer_1.DrawBoundary( this.fieldDrawer.viewRadius, boundaryDir_1 );
             this.boundaryDrawer_2.DrawBoundary( this.fieldDrawer.viewRadius, boundaryDir_2 );
         }

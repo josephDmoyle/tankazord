@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI.Extensions;
 
-
 namespace Princeps.Player
 {
     [RequireComponent( typeof( UILineRenderer ) )]
@@ -22,14 +21,14 @@ namespace Princeps.Player
 
         private void Start()
         {
-            
+
         }
 
-        public void DrawField()
+        public void DrawField( float arcAngle )
         {
             float x;
-            float y;  
-            float angle = 20f;
+            float y;
+            float angle = -arcAngle / 2;
 
             for ( int i = 0; i < ( this.segments + 1 ); i++ )
             {
@@ -38,7 +37,7 @@ namespace Princeps.Player
 
                 _uilr.Points[i] = new Vector2( x, y );
 
-                angle += ( 360f / this.segments );
+                angle += ( arcAngle / this.segments );
             }
         }
     }

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_ViewField
+  m_Name: UI_Target
   m_Shader: {fileID: 4800000, guid: c3c3af59790cf3749ba49fe1c838c94e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -79,5 +79,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.13866144, g: 0.6157263, b: 0.7169812, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

@@ -18,7 +18,6 @@ namespace Princeps.Player
         public void DrawCircle( float viewRadius )
         {
             float x;
-            float y;
             float z;
 
             float angle = 20f;

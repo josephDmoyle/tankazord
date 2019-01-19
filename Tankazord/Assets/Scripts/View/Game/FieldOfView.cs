@@ -1,4 +1,5 @@
 ﻿using Princeps.Enemy;
+using Princeps.Player.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ namespace Princeps.Player
         public ViewBoundaryDrawer boundaryDrawer_1;
 
         public ViewBoundaryDrawer boundaryDrawer_2;
+
+        public ViewUIController uiController;
 
         [Range( 0, 180 )]
         public float viewAngle;
@@ -41,6 +44,7 @@ namespace Princeps.Player
         private void FindVisableTargets()
         {
             _collidersInView.Clear( );
+            this.uiController.CleanTargets( );
             var collidersInSphere = Physics.OverlapSphere( this.transform.position, this.viewRadius, this.targetMask );
             for ( int i = 0; i < collidersInSphere.Length; i++ )
             {
@@ -52,6 +56,15 @@ namespace Princeps.Player
                     var target = targetTransform.GetComponent<Target>( );
                     target.inSight = true;
                     _collidersInView.Add( collidersInSphere[i] );
+
+                    // Draw the target on the view ui
+                    var rawDirection = targetTransform.transform.position - this.transform.position;
+                    // The percentage for radius
+                    float radiusPercentage = rawDirection.magnitude / this.viewRadius;
+                    float angle = Vector3.SignedAngle( this.transform.forward, rawDirection.normalized, Vector3.up );
+                    // Map out the positions of target into the view ui.
+                    var dirInView = new Vector2( Mathf.Sin( angle * Mathf.Deg2Rad ), Mathf.Cos( angle * Mathf.Deg2Rad ) );
+                    this.uiController.DrawTarget( dirInView, radiusPercentage );
                 }
             }
             // Use the an array pointer to record the colliders which can be viewed last frame.
@@ -82,7 +95,9 @@ namespace Princeps.Player
             _cachedCollidersInView = new List<Collider>( );
             // Draw the view field
             this.circleDrawer.DrawCircle( this.viewRadius );
-
+            var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2, false );
+            var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2, false );
+            this.uiController.Setup( this.viewAngle, new Vector2( viewDir_1.x, viewDir_1.z ), new Vector2( viewDir_2.x, viewDir_2.z ) );
         }
 
         private void Update()
@@ -96,7 +111,7 @@ namespace Princeps.Player
                 this.FindVisableTargets( );
             }
 
-            // Update the actual view boundary
+            // Update the actual view boundary in scene
             var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2, false );
             var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2, false );
             this.boundaryDrawer_1.DrawBoundary( this.transform.position, this.transform.position + viewDir_1 * this.viewRadius );

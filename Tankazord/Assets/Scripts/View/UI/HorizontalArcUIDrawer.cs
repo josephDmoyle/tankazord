@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI.Extensions;
 
-namespace Princeps.Player
+namespace Princeps.Player.UI
 {
-    [RequireComponent( typeof( UILineRenderer ) )]
-    public class FieldOfViewUIDrawer : MonoBehaviour
+    [RequireComponent( typeof( UICircle ) )]
+    public class HorizontalArcUIDrawer : MonoBehaviour
     {
         [Range( 0, 50 )]
         public int segments = 50;
-
-        public float viewRadius = 50.0f;
 
         private UILineRenderer _uilr;
 
@@ -19,12 +17,7 @@ namespace Princeps.Player
             _uilr.Points = new Vector2[this.segments + 1];
         }
 
-        private void Start()
-        {
-
-        }
-
-        public void DrawField( float arcAngle )
+        public void DrawArc( float arcAngle, float radius )
         {
             float x;
             float y;
@@ -32,8 +25,8 @@ namespace Princeps.Player
 
             for ( int i = 0; i < ( this.segments + 1 ); i++ )
             {
-                x = Mathf.Sin( Mathf.Deg2Rad * angle ) * this.viewRadius;
-                y = Mathf.Cos( Mathf.Deg2Rad * angle ) * this.viewRadius;
+                x = Mathf.Sin( Mathf.Deg2Rad * angle ) * radius;
+                y = Mathf.Cos( Mathf.Deg2Rad * angle ) * radius;
 
                 _uilr.Points[i] = new Vector2( x, y );
 
@@ -41,5 +34,4 @@ namespace Princeps.Player
             }
         }
     }
-
 }

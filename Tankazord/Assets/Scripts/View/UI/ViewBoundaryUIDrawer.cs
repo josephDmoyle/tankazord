@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI.Extensions;
 
-namespace Princeps.Player
+namespace Princeps.Player.UI
 {
     [RequireComponent( typeof( UILineRenderer ) )]
     public class ViewBoundaryUIDrawer : MonoBehaviour

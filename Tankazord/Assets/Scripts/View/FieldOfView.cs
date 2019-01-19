@@ -57,13 +57,13 @@ namespace Princeps.Player
                     _collidersInView.Add( collidersInSphere[i] );
 
                     // Draw the target on the view ui
+                    var rawDirection = targetTransform.transform.position - this.transform.position;
                     // The percentage for radius
-                    float radiusPercentage = Vector3.Magnitude( target.transform.position - this.transform.position ) / this.viewRadius;
-                    // Rotate the dircetion vector transform.eulerAngles.y counterclockwise
-                    float sin = Mathf.Sin( this.transform.eulerAngles.y * Mathf.Deg2Rad );
-                    float cos = Mathf.Cos( this.transform.eulerAngles.y * Mathf.Deg2Rad );
-                    Vector2 normalizeDir = new Vector2( direction.x * cos - direction.y * sin, direction.x * sin + direction.y * cos );
-                    this.uiController.DrawTarget( normalizeDir, radiusPercentage );
+                    float radiusPercentage = rawDirection.magnitude / this.viewRadius;
+                    Debug.Log( "The player rotate eulerAngles is " + this.transform.eulerAngles.y );
+                    float angle = Vector3.SignedAngle( this.transform.forward, rawDirection, Vector3.up );
+                    var normalDir = new Vector2( Mathf.Sin( angle * Mathf.Deg2Rad ), Mathf.Cos( angle * Mathf.Deg2Rad ) );
+                    this.uiController.DrawTarget( normalDir, radiusPercentage );
                 }
             }
             // Use the an array pointer to record the colliders which can be viewed last frame.

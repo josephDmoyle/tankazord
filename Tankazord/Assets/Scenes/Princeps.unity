@@ -1183,5 +1183,15 @@ PrefabInstance:
       propertyPath: uiController
       value: 
       objectReference: {fileID: 699497773}
+    - target: {fileID: 8332455214413348206, guid: 7eb3fb1bbd6ae1e4c87340b26650460c,
+        type: 3}
+      propertyPath: viewAngle
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8332455214413348206, guid: 7eb3fb1bbd6ae1e4c87340b26650460c,
+        type: 3}
+      propertyPath: viewRadius
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eb3fb1bbd6ae1e4c87340b26650460c, type: 3}

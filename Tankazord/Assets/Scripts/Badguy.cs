@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Badguy : MonoBehaviour
 {
-    [SerializeField] float turnSensitivity, footSensitivity, cannonballSpeed = 0f;
+    [SerializeField] float turnSensitivity, footSensitivity, cannonballSpeed = 0f, attackTime = 5f, timer = 0f;
     [SerializeField] private GameObject projectile;
+    [SerializeField] bool dead = false;
+    [SerializeField] Transform muzzle;
 
     Transform target;
     Rigidbody body;
@@ -20,12 +22,28 @@ public class Badguy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 mov = target.position - transform.position;
-        mov.y = 0f;
+        if (!dead)
+        {
+            Vector3 mov = target.position - transform.position;
+            mov.y = 0f;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(mov), turnSensitivity);
+            if (Vector3.Distance(transform.position, target.position) < 40f)
+                body.velocity = footSensitivity * new Vector3(mov.normalized.x, body.velocity.y, mov.normalized.z);
 
-        transform.forward = mov;
+            if (timer < attackTime)
+                timer += Time.fixedDeltaTime;
+            else
+            {
+                timer = 0f;
+                Transform bullet = Instantiate(projectile, muzzle.position, transform.rotation).transform;
+                bullet.up = mov;
+                bullet.GetComponent<Rigidbody>().velocity = bullet.up * cannonballSpeed;
+            }
+        }
+    }
 
-        if(mov.magnitude < 40f)
-            body.velocity = footSensitivity * new Vector3(mov.normalized.x, body.velocity.y, mov.normalized.z);
+    public void Disappear()
+    {
+        Destroy(gameObject);
     }
 }

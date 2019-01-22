@@ -14,25 +14,25 @@ namespace Princeps.Enemy
 
         private void Awake()
         {
-            this.meshRenderer = this.GetComponent<Renderer>( );
+            //this.meshRenderer = this.GetComponent<Renderer>( );
         }
 
         private void Start()
         {
             this.inSight = false;
-            _cachedColor = this.meshRenderer.material.color;
+            //_cachedColor = this.meshRenderer.material.color;
         }
 
         private void Update()
         {
-            if ( this.inSight && this.meshRenderer.material.color != targetedColor )
-            {
-                this.meshRenderer.material.SetColor( "_Color", targetedColor );
-            }
-            else if ( !this.inSight && this.meshRenderer.material.color == targetedColor )
-            {
-                this.meshRenderer.material.SetColor( "_Color", _cachedColor );
-            }
+            //if ( this.inSight && this.meshRenderer.material.color != targetedColor )
+            //{
+            //    this.meshRenderer.material.SetColor( "_Color", targetedColor );
+            //}
+            //else if ( !this.inSight && this.meshRenderer.material.color == targetedColor )
+            //{
+            //    this.meshRenderer.material.SetColor( "_Color", _cachedColor );
+            //}
         }
     }
 }

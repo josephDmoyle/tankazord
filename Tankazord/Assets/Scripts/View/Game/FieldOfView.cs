@@ -95,8 +95,8 @@ namespace Princeps.Player
             _cachedCollidersInView = new List<Collider>( );
             // Draw the view field
             this.circleDrawer.DrawCircle( this.viewRadius );
-            var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2, false );
-            var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2, false );
+            var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2 );
+            var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2 );
             this.uiController.Setup( this.viewAngle, new Vector2( viewDir_1.x, viewDir_1.z ), new Vector2( viewDir_2.x, viewDir_2.z ) );
         }
 

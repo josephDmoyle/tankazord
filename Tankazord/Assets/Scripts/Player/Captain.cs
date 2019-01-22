@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Princeps.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class Captain : MonoBehaviour
     {
         public float moveSpeed = 10.0f;
 
@@ -40,4 +41,3 @@ namespace Princeps.Player
         }
     }
 }
-

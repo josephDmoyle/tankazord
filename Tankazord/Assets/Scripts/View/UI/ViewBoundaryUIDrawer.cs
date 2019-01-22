@@ -24,9 +24,7 @@ namespace Princeps.Player.UI
 
         public void DrawBoundary( float radius, Vector2 direction )
         {
-            var startPosition = Vector2.zero;
-            _uilr.Points[0] = startPosition;
-            _uilr.Points[1] = startPosition + radius * direction;
+            _uilr.Points[1] = radius * direction;
         }
     }
 }

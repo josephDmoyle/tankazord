@@ -66,7 +66,7 @@ namespace Princeps.Player
             Vector3 dir = Vector2.zero;
             Vector3 posOfTarget;
             float angle;
-            int counter = 0;
+            int counter = 1;
 
             for ( int i = 0; i < size; i++ )
             {

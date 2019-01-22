@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Princeps.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class Captain : MonoBehaviour
     {
+        public List<Transform> targetPoints;
+
         public float moveSpeed = 10.0f;
 
         public Rigidbody rigidbody { get; private set; }
@@ -40,4 +43,3 @@ namespace Princeps.Player
         }
     }
 }
-

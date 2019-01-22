@@ -71,9 +71,9 @@ namespace Princeps.Player
             for ( int i = 0; i < size; i++ )
             {
                 angle = startAngle + i * angleSegement;
-                dir = _manager.view.Editor_DirectionFromAngle( angle );
+                dir = _manager.view.DirectionFromAngle( angle, false );
                 posOfTarget = _manager.transform.position + dir * ( radiusSegement / 2 );
-                for ( int j = 0; j < size ; j++ )
+                for ( int j = 0; j < size; j++ )
                 {
                     var newTarget = new GameObject( );
                     newTarget.name = "Target_" + counter;

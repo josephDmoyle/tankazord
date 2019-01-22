@@ -117,16 +117,5 @@ namespace Princeps.Player
             this.boundaryDrawer_1.DrawBoundary( this.transform.position, this.transform.position + viewDir_1 * this.viewRadius );
             this.boundaryDrawer_2.DrawBoundary( this.transform.position, this.transform.position + viewDir_2 * this.viewRadius );
         }
-
-#if UNITY_EDITOR
-        public Vector3 Editor_DirectionFromAngle( float angle, bool isGlobalAngle = true )
-        {
-            if ( !isGlobalAngle )
-            {
-                angle += this.GetComponent<Transform>( ).eulerAngles.y;
-            }
-            return new Vector3( Mathf.Sin( angle * Mathf.Deg2Rad ), 0, Mathf.Cos( angle * Mathf.Deg2Rad ) );
-        }
-#endif
     }
 }

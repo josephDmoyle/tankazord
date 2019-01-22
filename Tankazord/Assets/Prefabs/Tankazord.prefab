@@ -4691,32 +4691,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSensitivity: 15
   footSensitivity: 8
-  cannonballSpeed: 100
-  coordinates:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  projectile: {fileID: 4489472731021221600, guid: cf2ea586d99eae74e8cfa7e21b1df526,
-    type: 3}
-  weaponsFree: 0
-  fire:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
 --- !u!95 &7899068920880878906
 Animator:
   serializedVersion: 3

@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1426170600}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1fb7cc78402f114da705ef047046a49, type: 3}
   m_Name: 
@@ -1137,8 +1137,9 @@ MonoBehaviour:
   timer: 0
   projectile: {fileID: 4489472731021221600, guid: cf2ea586d99eae74e8cfa7e21b1df526,
     type: 3}
-  dead: 0
   muzzle: {fileID: 106093067}
+  explosion: {fileID: 105233564891519343, guid: 9ee5f2c4fcf7394458b0b2c83b7bbea8,
+    type: 3}
 --- !u!33 &1426170607
 MeshFilter:
   m_ObjectHideFlags: 0

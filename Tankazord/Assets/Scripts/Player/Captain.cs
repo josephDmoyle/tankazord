@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Princeps.Player
 {
@@ -13,9 +12,11 @@ namespace Princeps.Player
 
         public Vector3 velocity { get; private set; }
 
+        public Missile missilePrefab;
+
         private void Awake()
         {
-            this.rigidbody = this.GetComponent<Rigidbody>();
+            this.rigidbody = this.GetComponent<Rigidbody>( );
             this.mainCamera = Camera.main;
         }
 
@@ -38,6 +39,11 @@ namespace Princeps.Player
         private void FixedUpdate()
         {
             this.rigidbody.MovePosition( this.rigidbody.position + this.velocity * Time.fixedDeltaTime );
+        }
+
+        private void FireMissile()
+        {
+
         }
     }
 }

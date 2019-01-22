@@ -73,7 +73,7 @@ namespace Princeps.Player
                 for ( int i = 0; i < _cachedCollidersInView.Count; i++ )
                 {
                     var previousCollider = _cachedCollidersInView[i];
-                    if ( !_collidersInView.Contains( previousCollider ) )
+                    if ( previousCollider != null && !_collidersInView.Contains( previousCollider )  )
                     {
                         previousCollider.GetComponent<Target>( ).inSight = false;
                     }

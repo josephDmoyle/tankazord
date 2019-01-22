@@ -1806,7 +1806,6 @@ GameObject:
   - component: {fileID: 4617279769428249178}
   - component: {fileID: 4617279769429019258}
   - component: {fileID: 4617279769430149306}
-  - component: {fileID: 4617279769427957371}
   m_Layer: 14
   m_Name: EnemyMech
   m_TagString: Untagged
@@ -1814,19 +1813,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &4617279769427957371
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4617279769427957370}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.077784, y: 11.553408, z: 9.304475}
-  m_Center: {x: 0.1306881, y: 5.804929, z: -0.92072546}
 --- !u!4 &4617279769428249178
 Transform:
   m_ObjectHideFlags: 0
@@ -1958,5 +1944,20 @@ PrefabInstance:
       propertyPath: uiController
       value: 
       objectReference: {fileID: 1152033012}
+    - target: {fileID: 7899068920572668379, guid: 1d054aae73f3c2649b6b447c1a4c8693,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899068920609194301, guid: 1d054aae73f3c2649b6b447c1a4c8693,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899068921045267196, guid: 1d054aae73f3c2649b6b447c1a4c8693,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d054aae73f3c2649b6b447c1a4c8693, type: 3}

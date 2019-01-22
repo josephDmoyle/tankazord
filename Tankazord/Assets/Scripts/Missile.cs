@@ -11,6 +11,7 @@ namespace Princeps.Player
 
         private void OnCollisionEnter( Collision collision )
         {
+            // Pack two layers together
             var bitLayerMask_Ground = 1 << LayerMask.NameToLayer( "Ground" );
             var bitLayerMask_Target = 1 << LayerMask.NameToLayer( "Target" );
             var combineLayerMask = bitLayerMask_Ground | bitLayerMask_Target;

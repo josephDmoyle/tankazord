@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889be19f946a7f747a9d65b937e86f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  span: 3
+  span: 10
 --- !u!114 &1359055370860506621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,4 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654e36ea94b176f48996f53efa95089f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {x: 0, y: 0, z: 0}
   damage: 10
+  speed: 1

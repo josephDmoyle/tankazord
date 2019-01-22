@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Controller : Player
 {
-    [SerializeField] Transform hull, footL, footR;
-    [SerializeField] float turnSensitivity, footSensitivity;
-    [SerializeField] Cannon cannon;
+    [SerializeField] float turnSensitivity, footSensitivity, cannonballSpeed = 0f;
+    [SerializeField] Transform[] coordinates;
+    [SerializeField] private GameObject projectile;
+    [SerializeField] bool weaponsFree = false;
 
-    float turn = 0f, rx = 0f, ry = 0f, lx = 0f, ly = 0f, go = 0f, fire = 0f, prevFire = 0f;
-
+    float turn = 0f, rx = 0f, ry = 0f, lx = 0f, ly = 0f, go = 0f, prevFire = 0f;
+    [SerializeField] float[] fire = new float[10];
+    int coordinate = 0;
     Rigidbody body;
     Animator anim;
 
@@ -22,14 +24,22 @@ public class Controller : Player
     // Update is called once per frame
     void FixedUpdate()
     {
-        turn = Input.GetAxis("Turn") * turnSensitivity;
         rx = Input.GetAxis("RX");
         ry = Input.GetAxis("RY");
         lx = Input.GetAxis("LX");
         ly = Input.GetAxis("LY");
-        fire = Input.GetAxis("Fire");
 
-        turn *= Time.fixedDeltaTime;
+        for(int i = 0; i < 10; i++)
+            fire[i] = Input.GetAxis("Fire" + i.ToString());
+
+        if (rx > 0f && lx > 0f)
+            turn = 1f;
+        else if (rx < 0f && lx < 0f)
+            turn = -1f;
+        else
+            turn = 0f;
+
+        turn *= turnSensitivity * Time.fixedDeltaTime;
 
         transform.Rotate(0, turn, 0);
 
@@ -40,21 +50,28 @@ public class Controller : Player
 
         body.velocity = new Vector3(mov.x, body.velocity.y, mov.z);
 
-        if (fire > 0f && prevFire == 0f && go == 0f && turn == 0f)
-        {
-            anim.SetTrigger("Fire");
-        }
-        prevFire = fire;
+        coordinate = 0;
+        for (int i = 0; i < 10; i++)
+            if (fire[i] > 0f)
+                coordinate = i;
 
+        if (coordinate > 0 && prevFire == 0f && go == 0f && turn == 0f && weaponsFree)
+        {
+            weaponsFree = false;
+            anim.SetBool("Fire", true);
+            Rigidbody proj = Instantiate(projectile, coordinates[coordinate].position + Vector3.up * 100, Quaternion.identity).GetComponent<Rigidbody>();
+            proj.velocity = -Vector3.up * cannonballSpeed;
+        }
+        else
+            anim.SetBool("Fire", false);
+
+        prevFire = 0f;
+        foreach (float f in fire)
+            prevFire += f;
     }
 
     public void Walk(float speed)
     {
         go = speed;
-    }
-
-    public void Fire()
-    {
-        cannon.Fire();
     }
 }

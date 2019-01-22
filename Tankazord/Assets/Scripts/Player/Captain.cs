@@ -5,8 +5,6 @@ namespace Princeps.Player
 {
     public class Captain : MonoBehaviour
     {
-        public List<Transform> targetPoints;
-
         public float moveSpeed = 10.0f;
 
         public Rigidbody rigidbody { get; private set; }

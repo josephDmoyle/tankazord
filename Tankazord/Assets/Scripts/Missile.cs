@@ -26,7 +26,10 @@ namespace Princeps.Player
                     {
                         collidersInSphere.RemoveAt( i );
                     }
-                    collision.gameObject.GetComponent<Health>().Damage(10f);
+                    if ( collision.gameObject != null )
+                    {
+                        collision.gameObject.GetComponent<Health>( ).Damage( 10f );
+                    }
                 }
                 Destroy( this.gameObject );
             }

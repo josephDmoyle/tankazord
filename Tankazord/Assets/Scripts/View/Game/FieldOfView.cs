@@ -93,8 +93,6 @@ namespace Princeps.Player
         {
             _collidersInView = new List<Collider>( );
             _cachedCollidersInView = new List<Collider>( );
-            // Draw the view field
-            this.circleDrawer.DrawCircle( this.viewRadius );
             var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2 );
             var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2 );
             this.uiController.Setup( this.viewAngle, new Vector2( viewDir_1.x, viewDir_1.z ), new Vector2( viewDir_2.x, viewDir_2.z ) );
@@ -112,10 +110,6 @@ namespace Princeps.Player
             }
 
             // Update the actual view boundary in scene
-            var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2, false );
-            var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2, false );
-            this.boundaryDrawer_1.DrawBoundary( this.transform.position, this.transform.position + viewDir_1 * this.viewRadius );
-            this.boundaryDrawer_2.DrawBoundary( this.transform.position, this.transform.position + viewDir_2 * this.viewRadius );
         }
     }
 }

@@ -2,15 +2,17 @@
 
 public class EnemySpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] GameObject enemy;
+    [SerializeField] float spawnTime = 5f;
+    float timer = 0f;
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        timer += Time.fixedDeltaTime;
+        if (timer > spawnTime)
+        {
+            Instantiate(enemy, transform.position, transform.rotation);
+            timer = 0f;
+        }
     }
 }

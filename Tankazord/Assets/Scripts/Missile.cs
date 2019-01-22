@@ -26,7 +26,7 @@ namespace Princeps.Player
                     {
                         collidersInSphere.RemoveAt( i );
                     }
-                    Destroy( curCollider.gameObject );
+                    collision.gameObject.GetComponent<Health>().Damage(10f);
                 }
                 Destroy( this.gameObject );
             }

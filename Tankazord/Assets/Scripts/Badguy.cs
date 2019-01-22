@@ -7,7 +7,6 @@ public class Badguy : MonoBehaviour
     [SerializeField] float turnSensitivity, footSensitivity, cannonballSpeed = 0f, attackTime = 5f, timer = 0f;
     [SerializeField] private GameObject projectile;
     [SerializeField] Transform muzzle;
-    [SerializeField] GameObject explosion;
 
     Transform target;
     Rigidbody body;
@@ -20,17 +19,12 @@ public class Badguy : MonoBehaviour
         target = GameObject.FindObjectOfType<Controller>().transform;
     }
 
-    private void OnDestroy()
-    {
-        Instantiate(explosion, transform.position, transform.rotation);
-    }
-
     private void FixedUpdate()
     {
         Vector3 mov = target.position - transform.position;
         mov.y = 0f;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(mov), turnSensitivity);
-        if (Vector3.Distance(transform.position, target.position) < 40f)
+        if (Vector3.Distance(transform.position, target.position) > 50f)
             body.velocity = footSensitivity * new Vector3(mov.normalized.x, body.velocity.y, mov.normalized.z);
 
         if (timer < attackTime)

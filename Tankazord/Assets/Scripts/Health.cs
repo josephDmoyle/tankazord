@@ -5,21 +5,21 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] float MaxHitPoints = 10;
+    [SerializeField] GameObject explosion;
+
     float HitPoints;
-    Animator anim;
 
     private void Awake()
     {
         HitPoints = MaxHitPoints;
-        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
     {
         if(HitPoints <= 0f)
         {
-            GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Discrete;
-            anim.SetTrigger("Die");
+            Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
     }
 

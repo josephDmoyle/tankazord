@@ -1410,6 +1410,10 @@ PrefabInstance:
       propertyPath: renderView
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2121894181, guid: 7eb3fb1bbd6ae1e4c87340b26650460c, type: 3}
+      propertyPath: viewAngle
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 765582167, guid: 7eb3fb1bbd6ae1e4c87340b26650460c, type: 3}
       propertyPath: targetPoints.Array.size
       value: 9

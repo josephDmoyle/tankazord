@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a75519c1371fa24e921a9465d47376c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 6
+  explosionRadius: 30
   instantiateHeight: 20
 --- !u!54 &3606021127522207689
 Rigidbody:

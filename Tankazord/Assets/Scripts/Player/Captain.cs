@@ -11,7 +11,11 @@ namespace Princeps.Player
 
         public TargetManager targetManager;
 
+        public float missileCoolDown = 1.0f;
+
         private List<KeyCode> _keycodes;
+
+        private float _missileTimer;
 
         private void Awake()
         {
@@ -26,7 +30,11 @@ namespace Princeps.Player
         // Update is called once per frame
         void Update()
         {
-            this.FireMissile( );
+            _missileTimer += Time.deltaTime;
+            if ( _missileTimer >= this.missileCoolDown )
+            {
+                this.FireMissile( );
+            }
         }
 
         private void FireMissile()
@@ -42,12 +50,12 @@ namespace Princeps.Player
                         var target = targetManager.targetPoints.Find( t => t.name == targetName );
                         if ( target != null )
                         {
+                            _missileTimer = 0.0f;
                             Instantiate<Missile>( this.missilePrefab, new Vector3( target.transform.position.x, this.transform.position.y + this.missilePrefab.instantiateHeight, target.transform.position.z ), Quaternion.identity, null );
-                        }
+                        }                  
                         break;
                     }
                 }
-
             }
         }
 

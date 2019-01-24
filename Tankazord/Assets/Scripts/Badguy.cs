@@ -26,15 +26,5 @@ public class Badguy : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(mov), turnSensitivity);
         if (Vector3.Distance(transform.position, target.position) > 50f)
             body.velocity = footSensitivity * new Vector3(mov.normalized.x, body.velocity.y, mov.normalized.z);
-
-        if (timer < attackTime)
-            timer += Time.fixedDeltaTime;
-        else
-        {
-            timer = 0f;
-            Transform bullet = Instantiate(projectile, muzzle.position, transform.rotation).transform;
-            bullet.up = mov;
-            bullet.GetComponent<Rigidbody>().velocity = bullet.up * cannonballSpeed;
-        }
     }
 }

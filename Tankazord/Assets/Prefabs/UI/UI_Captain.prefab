@@ -293,8 +293,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.164, y: 0.15415168}
   m_AnchorMax: {x: 0.164, y: 0.15415168}
-  m_AnchoredPosition: {x: 0.8999634, y: -1.5}
-  m_SizeDelta: {x: 117.8, y: 115.5}
+  m_AnchoredPosition: {x: 0.8999634, y: 0.30062866}
+  m_SizeDelta: {x: 117.8, y: 111.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1152033012
 MonoBehaviour:
@@ -308,8 +308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74f5dbf9092ac0247834fb38fb093a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 120
+  viewRadius: 80
   targetIndicatorPrefab: {fileID: 475397050, guid: fafdeeddbd71772489db62b2cc38ad34,
+    type: 3}
+  keyIndicatorPrefab: {fileID: 4129213746777153818, guid: 231ea0695ccd5df4faca467edada62bc,
     type: 3}
   horizontalArcPrefab: {fileID: 3005255181094495236, guid: d9b741be9d72b6940b0739de975b7b76,
     type: 3}

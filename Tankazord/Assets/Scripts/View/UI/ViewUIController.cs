@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Princeps.Player.UI
 {
@@ -8,6 +9,8 @@ namespace Princeps.Player.UI
         public float viewRadius = 100.0f;
 
         public GameObject targetIndicatorPrefab;
+
+        public Text keyIndicatorPrefab;
 
         public HorizontalArcUIDrawer horizontalArcPrefab;
 
@@ -71,15 +74,39 @@ namespace Princeps.Player.UI
 
             // Draw radius;
             float angle = -viewAngle / 2;
-            float segementOfAngle = viewAngle / size;
+            float segmentOfAngle = viewAngle / size;
             for ( int i = 0; i < size - 1; ++i )
             {
-                angle += segementOfAngle;
+                angle += segmentOfAngle;
                 // Instantiate a new radius drawer
                 var radiusDrawer = Instantiate<RadiusUIDrawer>( this.radiusPrefab );
                 radiusDrawer.transform.SetParent( this.transform );
                 radiusDrawer.GetComponent<RectTransform>( ).anchoredPosition = anchoredPosition;
                 radiusDrawer.DrawRadius( angle, this.viewRadius );
+            }
+
+            // Draw the indicator for key
+            // Use the number 1~9 temporarily 
+            int counter = 1;
+            float startAngle = viewAngle / ( size * 2 ) - viewAngle / 2;
+            Vector2 dir = Vector2.zero;
+            Vector2 posOfKey; ;
+
+            for ( int i = 0; i < size; i++ )
+            {
+                angle = startAngle + i * segmentOfAngle;
+                dir = new Vector2( Mathf.Sin( angle * Mathf.Deg2Rad ), Mathf.Cos( angle * Mathf.Deg2Rad ) );
+                posOfKey = dir * ( segmentOfRadius / 2 );
+                for ( int j = 0; j < size; j++ )
+                {
+                    var keyIndicator = Instantiate<Text>( this.keyIndicatorPrefab );
+                    keyIndicator.name = "Key_" + counter;
+                    keyIndicator.transform.SetParent( this.transform );
+                    keyIndicator.GetComponent<RectTransform>( ).anchoredPosition = posOfKey;
+                    keyIndicator.text = counter.ToString( );
+                    posOfKey += ( dir * segmentOfRadius );
+                    ++counter;
+                }
             }
         }
 

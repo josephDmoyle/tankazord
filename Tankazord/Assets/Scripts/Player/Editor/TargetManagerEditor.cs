@@ -61,8 +61,8 @@ namespace Princeps.Player
             // Clear the previous one
             this.ClearTargets( );
             float startAngle = _manager.view.viewAngle / ( size * 2 ) - _manager.view.viewAngle / 2;
-            var angleSegement = _manager.view.viewAngle / size;
-            var radiusSegement = _manager.view.viewRadius / size;
+            var segmentOfAngle = _manager.view.viewAngle / size;
+            var segmentOfRadius = _manager.view.viewRadius / size;
             Vector3 dir = Vector2.zero;
             Vector3 posOfTarget;
             float angle;
@@ -70,9 +70,9 @@ namespace Princeps.Player
 
             for ( int i = 0; i < size; i++ )
             {
-                angle = startAngle + i * angleSegement;
+                angle = startAngle + i * segmentOfAngle;
                 dir = _manager.view.DirectionFromAngle( angle, false );
-                posOfTarget = _manager.transform.position + dir * ( radiusSegement / 2 );
+                posOfTarget = _manager.transform.position + dir * ( segmentOfRadius / 2 );
                 for ( int j = 0; j < size; j++ )
                 {
                     var newTarget = new GameObject( );
@@ -83,7 +83,7 @@ namespace Princeps.Player
                     _manager.targetPoints.Add( targetTransform );
 
                     ++counter;
-                    posOfTarget += ( dir * radiusSegement );
+                    posOfTarget += ( dir * segmentOfRadius );
                 }
             }
         }

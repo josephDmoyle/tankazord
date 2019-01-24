@@ -52,7 +52,7 @@ namespace Princeps.Player
                         {
                             _missileTimer = 0.0f;
                             Instantiate<Missile>( this.missilePrefab, new Vector3( target.transform.position.x, this.transform.position.y + this.missilePrefab.instantiateHeight, target.transform.position.z ), Quaternion.identity, null );
-                        }                  
+                        }
                         break;
                     }
                 }

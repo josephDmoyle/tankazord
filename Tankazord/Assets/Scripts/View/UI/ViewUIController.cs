@@ -20,9 +20,7 @@ namespace Princeps.Player.UI
 
         public ViewBoundaryUIDrawer boundaryDrawer_2;
 
-        private RectTransform _testTransform;
-
-        private List<GameObject> _curTargetIndicators;
+        private List<GameObject> _cachedTargetIndicators;
 
         private int _curIndicatorIdx;
 
@@ -35,13 +33,13 @@ namespace Princeps.Player.UI
 
         public void DrawTarget( Vector2 direction, float radiusPercentage )
         {
-            if ( _curIndicatorIdx >= _curTargetIndicators.Count )
+            if ( _curIndicatorIdx >= _cachedTargetIndicators.Count )
             {
                 var newIndicator = Instantiate( targetIndicatorPrefab );
                 newIndicator.transform.SetParent( this.transform );
-                _curTargetIndicators.Add( newIndicator );
+                _cachedTargetIndicators.Add( newIndicator );
             }
-            var indicator = _curTargetIndicators[_curIndicatorIdx++];
+            var indicator = _cachedTargetIndicators[_curIndicatorIdx++];
             indicator.SetActive( true );
             var transform = indicator.GetComponent<RectTransform>( );
             transform.anchoredPosition = direction * ( radiusPercentage * this.viewRadius );
@@ -50,9 +48,9 @@ namespace Princeps.Player.UI
         public void CleanTargets()
         {
             _curIndicatorIdx = 0;
-            for ( int i = 0; i < _curTargetIndicators.Count; i++ )
+            for ( int i = 0; i < _cachedTargetIndicators.Count; i++ )
             {
-                _curTargetIndicators[i].SetActive( false );
+                _cachedTargetIndicators[i].SetActive( false );
             }
         }
 
@@ -90,7 +88,7 @@ namespace Princeps.Player.UI
             int counter = 1;
             float startAngle = viewAngle / ( size * 2 ) - viewAngle / 2;
             Vector2 dir = Vector2.zero;
-            Vector2 posOfKey; ;
+            Vector2 posOfKey;
 
             for ( int i = 0; i < size; i++ )
             {
@@ -112,7 +110,7 @@ namespace Princeps.Player.UI
 
         private void Awake()
         {
-            _curTargetIndicators = new List<GameObject>( );
+            _cachedTargetIndicators = new List<GameObject>( );
             _curIndicatorIdx = 0;
         }
     }

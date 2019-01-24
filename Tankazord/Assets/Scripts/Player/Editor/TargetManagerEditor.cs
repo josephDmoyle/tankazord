@@ -102,8 +102,7 @@ namespace Princeps.Player
                     {
                         var removeGameObject = _manager.targetPoints[i].gameObject;
                         _manager.targetPoints.RemoveAt( i );
-                        DestroyImmediate( removeGameObject );
-
+                        Destroy( removeGameObject );
                     }
                 }
             }

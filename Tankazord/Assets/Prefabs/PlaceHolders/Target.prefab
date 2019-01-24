@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7801146811542330646}
   - component: {fileID: 7801146811542330647}
   - component: {fileID: 367932299}
+  - component: {fileID: 223860574}
   m_Layer: 14
   m_Name: Target
   m_TagString: Untagged
@@ -105,4 +106,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4f2ee49478cd042a192934011eba9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetedColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &223860574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801146811542330632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11c94d9305b96447982c497de9eb604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tintColor: {r: 1, g: 0, b: 0, a: 1}

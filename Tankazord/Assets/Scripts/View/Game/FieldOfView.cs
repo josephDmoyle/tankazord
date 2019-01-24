@@ -24,6 +24,8 @@ namespace Princeps.Player
 
         public LayerMask targetMask;
 
+        public bool renderView = false;
+
         private float _timer;
 
         private List<Collider> _cachedCollidersInView;
@@ -73,7 +75,7 @@ namespace Princeps.Player
                 for ( int i = 0; i < _cachedCollidersInView.Count; i++ )
                 {
                     var previousCollider = _cachedCollidersInView[i];
-                    if ( previousCollider != null && !_collidersInView.Contains( previousCollider )  )
+                    if ( previousCollider != null && !_collidersInView.Contains( previousCollider ) )
                     {
                         previousCollider.GetComponent<Target>( ).inSight = false;
                     }
@@ -96,6 +98,11 @@ namespace Princeps.Player
             var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2 );
             var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2 );
             this.uiController.Setup( this.viewAngle, new Vector2( viewDir_1.x, viewDir_1.z ), new Vector2( viewDir_2.x, viewDir_2.z ) );
+
+            if ( this.renderView )
+            {
+                this.circleDrawer.DrawCircle( this.viewRadius );
+            }
         }
 
         private void Update()
@@ -109,7 +116,14 @@ namespace Princeps.Player
                 this.FindVisableTargets( );
             }
 
-            // Update the actual view boundary in scene
+            if ( this.renderView )
+            {
+                // Update the actual view boundary in scene
+                var viewDir_1 = this.DirectionFromAngle( -this.viewAngle / 2, false );
+                var viewDir_2 = this.DirectionFromAngle( this.viewAngle / 2, false );
+                this.boundaryDrawer_1.DrawBoundary( this.transform.position, this.transform.position + viewDir_1 * this.viewRadius );
+                this.boundaryDrawer_2.DrawBoundary( this.transform.position, this.transform.position + viewDir_2 * this.viewRadius );
+            }
         }
     }
 }

@@ -28,7 +28,15 @@ namespace Princeps.Player
                     }
                     if ( curCollider.gameObject != null )
                     {
-                        curCollider.gameObject.GetComponent<Health>( ).Damage( 10f );
+                        var health = curCollider.gameObject.GetComponent<Health>( );
+                        if ( health != null )
+                        {
+                            curCollider.gameObject.GetComponent<Health>( ).Damage( 10f );
+                        }
+                        else
+                        {
+                            Destroy( curCollider.gameObject );
+                        }
                     }
                 }
                 Destroy( this.gameObject );

@@ -1,12 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Badguy : MonoBehaviour
 {
     [SerializeField] float turnSensitivity, footSensitivity, cannonballSpeed = 0f, attackTime = 5f, timer = 0f;
-    [SerializeField] private GameObject projectile;
-    [SerializeField] Transform muzzle;
 
     Transform target;
     Rigidbody body;
